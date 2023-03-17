@@ -11,6 +11,8 @@ exports.signup = BigPromise(async (req, res, next) => {
   //extract data
   const { name, email, password, country } = req.body;
 
+  console.log(req.body);
+
   // data validation
   if (!name || !email || !password || !country) {
     return next(new customError("Name, Email and Password are mandatory !"));

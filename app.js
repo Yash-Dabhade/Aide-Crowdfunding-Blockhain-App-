@@ -4,13 +4,17 @@ require("dotenv").config();
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
-
+const cors = require("cors");
 //create app from express
 const app = express();
 
 //morgan middleware
 app.use(morgan("tiny"));
-
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 //regular middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
