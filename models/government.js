@@ -75,6 +75,11 @@ governmentSchema.methods.isValidatedPassword = async function (passedPassword) {
   return await bcrypt.compare(passedPassword, this.password);
 };
 
+//validate password with user passed password
+governmentSchema.methods.isValidatedPrivateKey = async function (passedPK) {
+  return this.privateKey === passedPK;
+};
+
 //create and return jwt token
 governmentSchema.methods.getJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {

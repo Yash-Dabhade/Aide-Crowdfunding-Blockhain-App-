@@ -5,12 +5,12 @@ const cookieToken = require("../utils/cookieToken");
 const mailHelper = require("../utils/mailHelper");
 const cloudinary = require("cloudinary").v2;
 const crypto = require("crypto");
+const randomstring = require("randomstring");
 
 //sign up controller
 exports.signup = BigPromise(async (req, res, next) => {
   //extract data
-  const { ministry, email, password, country, organization, recentIP } =
-    req.body;
+  const { ministry, email, password, country, organization } = req.body;
 
   // data validation
   if (!ministry || !email || !password || !country || !organization) {
@@ -18,6 +18,11 @@ exports.signup = BigPromise(async (req, res, next) => {
       new customError("Ministry, Email, Organization, Password are mandatory !")
     );
   }
+
+  let privateKey = randomstring.generate({
+    length: 16,
+    charset: "alphabetic",
+  });
 
   //extract photo
   let photoResult = {
@@ -42,7 +47,7 @@ exports.signup = BigPromise(async (req, res, next) => {
     password,
     country,
     organization,
-    recentIP,
+    privateKey,
     photo: {
       id: photoResult.public_id,
       secure_url: photoResult.secure_url,
@@ -77,10 +82,16 @@ exports.login = BigPromise(async (req, res, next) => {
 
   //check password
   const isPasswordCorrect = await government.isValidatedPassword(password);
+  //check private key
+  const isPrivateKeyCorrect = await government.isValidatedPrivateKey(
+    privateKey
+  );
 
   //password is incorrect
-  if (!isPasswordCorrect) {
-    return next(new customError("Email or password is incorrect !", 404));
+  if (!isPasswordCorrect || !isPrivateKeyCorrect) {
+    return next(
+      new customError("Email or password or private key is incorrect !", 404)
+    );
   }
 
   //send cookie token
