@@ -30,6 +30,10 @@ app.use(cookieParser());
 //import all routes
 const home = require("./routes/home");
 const user = require("./routes/user");
+const campaign = require("./routes/campaign");
+const transaction = require("./routes/transaction");
+const payment = require("./routes/payment");
+const government = require("./routes/government");
 
 //testing routes
 app.get("/api/v1/signuptest", (req, res) => {
@@ -39,6 +43,10 @@ app.get("/api/v1/signuptest", (req, res) => {
 //router middlewares
 app.use("/api/v1", home);
 app.use("/api/v1", user);
+app.use("/api/v1", campaign);
+app.use("/api/v1", transaction);
+app.use("/api/v1", payment);
+app.use("/api/v1", government);
 
 //exporting app into index.js
 module.exports = app;

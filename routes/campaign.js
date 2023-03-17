@@ -8,8 +8,8 @@ const { postData } = require("../controllers/userController");
 const { isLoggedIn, customRole } = require("../middlewares/user");
 
 //admin only routes
-router
-  .route("/admin/users/campaign")
-  .get(isLoggedIn, customRole("admin"), postData);
+// router
+//   .route("/admin/users/campaign")
+//   .post(isLoggedIn, customRole("admin"), postData);
 
 module.exports = router;

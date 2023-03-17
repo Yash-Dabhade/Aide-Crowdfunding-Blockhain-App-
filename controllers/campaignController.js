@@ -8,10 +8,24 @@ const Campaign = require("../models/campaign");
 //sign up controller
 exports.postData = BigPromise(async (req, res, next) => {
   //extract data
-  const { title, description, fundsToBeRaised, country, cause } = req.body;
+  const {
+    title,
+    description,
+    fundsToBeRaised,
+    country,
+    cause,
+    segregationOfAmount,
+  } = req.body;
 
   // data validation
-  if (!title || !description || !fundsToBeRaised || !country || !cause) {
+  if (
+    !title ||
+    !segregationOfAmount ||
+    !description ||
+    !fundsToBeRaised ||
+    !country ||
+    !cause
+  ) {
     return next(new customError("All fields are mandatory are mandatory !"));
   }
 
@@ -22,6 +36,7 @@ exports.postData = BigPromise(async (req, res, next) => {
     fundsToBeRaised,
     country,
     cause,
+    segregationOfAmount,
   });
 
   //generate and send cookieToken

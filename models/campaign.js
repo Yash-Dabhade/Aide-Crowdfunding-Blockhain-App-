@@ -28,6 +28,15 @@ const campaignSchema = new mongoose.Schema({
   country: {
     type: String,
   },
+  segregationOfAmount: {
+    type: [
+      {
+        organizationName: String,
+        organizationCode: String,
+        rate: String,
+      },
+    ],
+  },
   cause: {
     type: String,
   },
