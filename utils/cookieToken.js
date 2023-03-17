@@ -1,7 +1,8 @@
 require("dotenv").config();
 const cookieToken = (user, res) => {
   // get token from custom built method
-  const token = user.getJwtToken();
+  // const token = user.getJwtToken();
+  const token = "user.getJwtToken()";
 
   //set options for the cookie
   const options = {

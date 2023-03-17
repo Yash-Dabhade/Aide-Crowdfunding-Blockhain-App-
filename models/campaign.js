@@ -44,6 +44,10 @@ const campaignSchema = new mongoose.Schema({
     type: Date,
     default: Date.now, // don't write with paranthesis to make it execute when instance is created
   },
+  createdBy: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "Government",
+  },
 });
 
 module.exports = mongoose.model("Campaign", campaignSchema);

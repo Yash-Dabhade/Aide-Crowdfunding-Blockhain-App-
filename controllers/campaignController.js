@@ -13,7 +13,7 @@ exports.getAllCampaigns = BigPromise(async (req, res, next) => {
         data: {
           data,
         },
-      })
+      });
     })
     .catch((err) => {
       res.status(500).json({
@@ -31,7 +31,7 @@ exports.getCampaign = BigPromise(async (req, res, next) => {
         data: {
           data,
         },
-      })
+      });
     })
     .catch((err) => {
       res.status(500).json({
@@ -51,7 +51,9 @@ exports.postData = BigPromise(async (req, res, next) => {
     country,
     cause,
     segregationOfAmount,
+    createdBy,
   } = req.body;
+  console.log(req.body);
 
   // data validation
   if (
@@ -60,7 +62,8 @@ exports.postData = BigPromise(async (req, res, next) => {
     !description ||
     !fundsToBeRaised ||
     !country ||
-    !cause
+    !cause ||
+    !createdBy
   ) {
     return next(new customError("All fields are mandatory are mandatory !"));
   }
@@ -73,6 +76,7 @@ exports.postData = BigPromise(async (req, res, next) => {
     country,
     cause,
     segregationOfAmount,
+    createdBy,
   });
 
   //generate and send cookieToken
