@@ -11,11 +11,11 @@ exports.sendRazorpayKey = BigPromise(async (req, res, next) => {
 exports.captureRazorpayPayment = BigPromise(async (req, res, next) => {
   const data = req.body.data;
 
-  if (!data) {
-    res.status(400).json({
-      success: "false",
-    });
-  }
+  // if (!data) {
+  //   res.status(400).json({
+  //     success: "false",
+  //   });
+  // }
 
   var instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,

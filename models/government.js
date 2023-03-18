@@ -43,14 +43,6 @@ const governmentSchema = new mongoose.Schema({
       type: String,
     },
   },
-  privateKey: {
-    type: String,
-    unique: true,
-  },
-  recentIP: {
-    type: String,
-    unique: true,
-  },
   forgotPasswordToken: String,
   forgotPasswordExpiry: Date,
   createdAt: {

@@ -17,6 +17,21 @@ const transactionSchema = new mongoose.Schema({
     // required: [true, "Please provide a password"],
     // minlength: [6, "Password must be atleast of 6 char"],
   },
+  createdBy: {
+    type: mongoose.SchemaTypes.ObjectId,
+  },
+  supplyChain: {
+    type: [
+      {
+        status: String,
+        remarks: String,
+        updatedBy: {
+          type: mongoose.Schema.ObjectId,
+          ref: "User",
+        },
+      },
+    ],
+  },
   remarks: {
     type: String,
   },
