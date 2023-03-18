@@ -43,6 +43,13 @@ const governmentSchema = new mongoose.Schema({
       type: String,
     },
   },
+  campaigns: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Campaign",
+    },
+  ],
+  chainOfAccounts: [{}],
   forgotPasswordToken: String,
   forgotPasswordExpiry: Date,
   createdAt: {

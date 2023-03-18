@@ -23,6 +23,26 @@ exports.getAllCampaigns = BigPromise(async (req, res, next) => {
     });
 });
 
+exports.updateCampus = BigPromise(async (req, res, next) => {
+  Campaign.findByIdAndUpdate(req.params.id, {
+    $set: req.body,
+  })
+    .then((data) => {
+      res.status(200).json({
+        status: "success",
+        data: {
+          data,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: "fail",
+        message: err,
+      });
+    });
+});
+
 exports.getCampaign = BigPromise(async (req, res, next) => {
   Campaign.findById(req.params.id)
     .then((data) => {

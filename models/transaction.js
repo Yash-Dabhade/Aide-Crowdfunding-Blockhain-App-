@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema({
+  order_id: {
+    type: String,
+    required: true,
+  },
+  transaction_id: {
+    type: String,
+    required: true,
+  },
   amountInDollars: {
     type: String,
     // required: [true, "Please provide a name"],

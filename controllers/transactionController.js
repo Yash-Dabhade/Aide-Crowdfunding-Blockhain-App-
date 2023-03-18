@@ -8,7 +8,14 @@ const Transaction = require("../models/transaction");
 //sign up controller
 exports.postData = BigPromise(async (req, res, next) => {
   //extract data
-  const { amountInDollars, fundsToBeRaised, remarks, status } = req.body;
+  const {
+    order_id,
+    transaction_id,
+    amountInDollars,
+    fundsToBeRaised,
+    remarks,
+    status,
+  } = req.body;
 
   // data validation
   if (!amountInDollars || !fundsToBeRaised || !remarks || !status) {
@@ -17,6 +24,8 @@ exports.postData = BigPromise(async (req, res, next) => {
 
   //saving document to db
   const transaction = await Transaction.create({
+    order_id,
+    transaction_id,
     amountInDollars,
     fundsToBeRaised,
     remarks,
@@ -26,3 +35,6 @@ exports.postData = BigPromise(async (req, res, next) => {
   //generate and send cookieToken
   cookieToken(transaction, res);
 });
+
+// listen to hooks to set data
+exports.razorPayWebHookListener = BigPromise(async (req, res, next) => {});
